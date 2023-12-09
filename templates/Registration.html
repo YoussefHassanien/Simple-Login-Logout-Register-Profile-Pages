@@ -1,10 +1,75 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>Title</title>
+    <meta charset="utf-8">
+    <title>User Registration Form</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css">
 </head>
 <body>
+<div class="container">
+    <h2>User Registration</h2>
+    {% if msg%}
+            <div class="alert alert-warning">{{ msg }}</div>
+    {% endif %}
 
+
+    <form action="/register" method="post">
+        <div class="form-group">
+            <label for="Fname">First Name:</label>
+            <input type="text" name="Fname" required class="form-control" id="Fname" placeholder="Enter your first name" autocomplete="off">
+        </div>
+
+         <div class="form-group">
+            <label for="Lname">Last Name:</label>
+            <input type="text" name="Lname" required class="form-control" id="Lname" placeholder="Enter your last name" autocomplete="off">
+        </div>
+
+        <div class="form-group">
+            <label for="phone">your phone:</label>
+            <input type="text" name="phone" required class="form-control" id="phone" placeholder="Enter your phone number" autocomplete="off">
+        </div>
+
+        <div class="form-group">
+            <label for="address">your address:</label>
+            <input type="text" name="address" required class="form-control" id="address" placeholder="Enter your address" autocomplete="off">
+        </div>
+
+        <div class="form-group">
+            <label for="email">Email:</label>
+            <input type="email" name="email" required class="form-control" id="email" placeholder="Enter email" autocomplete="off">
+        </div>
+
+        <div class="form-group">
+            <label for="password">Password:</label>
+            <input type="password" name="password" required class="form-control" id="password" placeholder="Enter password">
+        </div>
+
+        <div class="form-group">
+            <label for="job">Your job:</label>
+            <input type="text" name="job" required class="form-control" id="job" placeholder="Enter your job" autocomplete="off">
+        </div>
+
+        <div class="form-group">
+            <label for="facebook">Facebook:</label>
+            <input type="text" name="facebook"  class="form-control" id="facebook" placeholder="Enter your facebook account" autocomplete="off">
+        </div>
+
+        <div class="form-group">
+            <label for="github">Github:</label>
+            <input type="text" name="github"  class="form-control" id="github" placeholder="Enter your github account" autocomplete="off">
+        </div>
+        <div class="form-group">
+            <label for="instagram">Instagram:</label>
+            <input type="text" name="instagram"  class="form-control" id="instagram" placeholder="Enter your instagram account" autocomplete="off">
+        </div>
+        <div class="form-group">
+            <label for="linkedin">LinkedIn:</label>
+            <input type="text" name="linkedin"  class="form-control" id="linkedin" placeholder="Enter your linkedin account" autocomplete="off">
+        </div>
+
+        <button type="submit" class="btn btn-primary">Register</button>
+        <p class="bottom">Already have an account? <a class="bottom" href="/login"> Login here</a></p>
+    </form>
+</div>
 </body>
 </html>
