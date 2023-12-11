@@ -12,11 +12,12 @@
 <div class="container-fluid">
     <div class="row">
         <div class="col-md-3">
-            <p>{{ session.user.fname + " " + session.user.lname }}</p>
+            <h5>{{ session.user.fname + " " + session.user.lname }}</h5>
+            <h5>{{ status }}</h5>
             <br>
             <img src="{{ userprofileimage  }}" alt="Profile Picture" class="img-thumbnail">
             <br>
-            <p>{{ session.user.job }}</p>
+            <h5>{{ session.user.job }}</h5>
             <br>
             <ul>
                 <li> <strong><a href="/edit"> Edit Profile</a></strong></li>

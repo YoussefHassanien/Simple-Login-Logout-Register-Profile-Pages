@@ -22,8 +22,9 @@ def home():
     activity2 = "I love Rebecca!"
     activity3 = "I love Rebecca!"
     userprofileimage = "../static/Images/44-facts-about-rebecca-ferguson-1690782435.jpg"
-    return render_template("Profile.html", infomessage=message, activity1=activity1,
-                           activity2=activity2, activity3=activity3, userprofileimage=userprofileimage)
+    status = "Online"
+    return render_template("Profile.html", infomessage=message, activity1=activity1,activity2=activity2
+                           , activity3=activity3, userprofileimage=userprofileimage, status=status)
 
 
 @app.route("/login", methods=["GET", "POST"])
