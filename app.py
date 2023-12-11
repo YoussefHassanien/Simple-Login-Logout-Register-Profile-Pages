@@ -17,14 +17,14 @@ cursor = database_session.cursor(cursor_factory=psycopg2.extras.DictCursor)
 
 @app.route("/", methods=["GET", "POST"])
 def home():
-    message = "Please tell us more about you!"
+    biography = "Please tell us more about you!"
     activity1 = "I love Rebecca!"
     activity2 = "I love Rebecca!"
     activity3 = "I love Rebecca!"
     userprofileimage = "../static/Images/44-facts-about-rebecca-ferguson-1690782435.jpg"
     status = "Online"
-    return render_template("Profile.html", infomessage=message, activity1=activity1,activity2=activity2
-                           , activity3=activity3, userprofileimage=userprofileimage, status=status)
+    return render_template("Profile.html", biography=biography, activity1=activity1, activity2=activity2,
+                           activity3=activity3, userprofileimage=userprofileimage, status=status)
 
 
 @app.route("/login", methods=["GET", "POST"])
