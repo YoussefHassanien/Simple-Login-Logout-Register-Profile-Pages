@@ -14,9 +14,12 @@ database_session = psycopg2.connect(
 
 cursor = database_session.cursor(cursor_factory=psycopg2.extras.DictCursor)
 
-
 @app.route("/", methods=["GET", "POST"])
 def home():
+    return redirect('/login')
+
+@app.route("/profile", methods=["GET", "POST"])
+def profile():
     biography = "Please tell us more about you!"
     activity1 = "I love Rebecca!"
     activity2 = "I love Rebecca!"
@@ -37,7 +40,7 @@ def login():
         result = cursor.fetchone()
         if result:
             session['user'] = dict(result)
-            return redirect('/')
+            return redirect('/profile')
         else:
             message = 'Please enter correct email and password'
     return render_template('Login.html', msg=message)
