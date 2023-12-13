@@ -62,7 +62,7 @@ def register():
     userlinkedin = request.form.get("linkedin")
 
     if useremail:
-        cursor.execute('SELECT email FROM usersinformation where email = %s', (useremail))
+        cursor.execute('SELECT email FROM usersinformation where email = %s', (useremail,))
         if cursor.fetchone():
             message = 'Account already exits!'
         else:
@@ -106,10 +106,10 @@ def save_changes():
     status = request.form.get("status")
     CurrentEmail = session["user"]["email"]
     userprofileimage = " "
-    current_email = cursor.execute("SELECT email FROM usersinformation WHERE email =CurrentEmail")
+    cursor.execute("SELECT email FROM usersinformation WHERE email = %s", (CurrentEmail,))
+    current_email = cursor.fetchone()[0]
 
-
-    cursor.execute('UPDATE usersinformation SET Fname= %s , Lname= %s , Phone= %s, Address= %s , Job= %s , Facebook= %s,Github=%s, Instagram=%s, Linkedin=%s WHere email= %s',(userfname,userlname,userphone,useraddress,userjob,userfacebook,usergithub,userinstagram,userlinkedin,current_email))
+    cursor.execute('UPDATE usersinformation SET Fname= %s , Lname= %s , Phone= %s, Address= %s , Job= %s , Facebook= %s,Github= %s, Instagram= %s, Linkedin= %s WHERE email= %s',(userfname,userlname,userphone,useraddress,userjob,userfacebook,usergithub,userinstagram,userlinkedin,current_email))
     database_session.commit()
     return render_template("Profile.html", biography=biography, activity1=activity1, activity2=activity2,
                            activity3=activity3, userprofileimage=userprofileimage, status=status)
