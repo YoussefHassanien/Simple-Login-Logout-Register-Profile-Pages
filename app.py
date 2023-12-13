@@ -9,7 +9,7 @@ database_session = psycopg2.connect(
      port=5432,
      host="localhost",
      user="postgres",
-     password="8383"
+     password="Youssef.17.11"
 )
 
 cursor = database_session.cursor(cursor_factory=psycopg2.extras.DictCursor)
@@ -25,7 +25,7 @@ def profile():
     activity2 = "I love Rebecca!"
     activity3 = "I love Rebecca!"
     userprofileimage = "../static/Images/44-facts-about-rebecca-ferguson-1690782435.jpg"
-    status = "Online"
+    status = request.form.get("status")
     return render_template("Profile.html", biography=biography, activity1=activity1, activity2=activity2,
                            activity3=activity3, userprofileimage=userprofileimage, status=status)
 
@@ -62,7 +62,7 @@ def register():
     userlinkedin = request.form.get("linkedin")
 
     if useremail:
-        cursor.execute('SELECT email FROM usersinformation where email = %s', (useremail,))
+        cursor.execute('SELECT email FROM usersinformation where email = %s', (useremail))
         if cursor.fetchone():
             message = 'Account already exits!'
         else:
@@ -85,6 +85,32 @@ def logout():
 @app.route("/edit", methods=["GET", "POST"])
 def edit_profile():
     return render_template("Edit Information.html")
+
+@app.route("/Save Changes", methods=["GET", "POST"])
+def save_changes():
+    biography = request.form['biography']
+    userfname = request.form.get("Fname")
+    print(userfname)
+    userlname = request.form.get("Lname")
+    userphone = request.form.get("phone")
+    useraddress = request.form.get("Adress")
+    useremail = request.form.get("email")
+    userpassword = request.form.get("password")
+    userjob = request.form.get("job")
+    userfacebook = request.form.get("Fb")
+    usergithub = request.form.get("git")
+    userinstagram = request.form.get("ig")
+    userlinkedin = request.form.get("li")
+    activity1 = request.form.get("act1")
+    activity2 = request.form.get("act2")
+    activity3 = request.form.get("act3")
+    status = request.form.get("status")
+    CurrentEmail = session["user"]["email"]
+
+
+    cursor.execute('UPDATE usersinformation SET Fname= %s , Lname= %s , Phone= %s, Address= %s , Job= %s , Facebook= %s,Github=%s, Instagram=%s, Linkedin=%s WHere email= %s',(userfname,userlname,userphone,useraddress,userjob,userfacebook,usergithub,userinstagram,userlinkedin,CurrentEmail))
+    return redirect('/profile')
+
 
 
 if __name__ == '__main__':

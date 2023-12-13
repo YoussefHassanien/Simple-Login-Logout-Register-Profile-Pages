@@ -1,10 +1,46 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <title>Edit Information</title>
+    <meta charset="UTF-8" />
+    <link rel="stylesheet" href="../static/Css/Edit Information.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link href='https://unpkg.com/boxicons@2.0.9/css/boxicons.min.css' rel='stylesheet'>
+    <title>Edit</title>
 </head>
 <body>
-
+<section class="contact" id="contact">
+  <h1 class="heading"><span> Edit your </span> Information </h1>
+  <div class="roww">
+    <form action="/Save Changes" method="post">
+    <input type="text" placeholder="First Name" name="Fname" class="boxx" value="{{ session.user.fname }}">
+    <input type="text" placeholder="Last Name" name="Lname" class="boxx" value="{{ session.user.lname }}">
+    <input type="text" placeholder="Address" name="Adress" class="boxx" value="{{ session.user.address }}">
+    <input type="text" placeholder="Job" name="job" class="boxx" value="{{ session.user.job }}" >
+{#    <input type="email" placeholder="Email" name="email" class="boxx" value="{{ session.user.email }}">#}
+{#    <input type="password" placeholder="Password" name="password" class="boxx" value="{{ session.user.password }}">#}
+    <input type="tel" placeholder="Phone" name="phone" class="boxx" value="{{ session.user.phone }}">
+    <input type="text" placeholder="Please tell us more about you" name="biography" class="boxx">
+    <input type="text" placeholder="" name="biography" class="boxx">
+    <input type="text" placeholder="Activity1" name="act1" class="boxx">
+    <input type="text" placeholder="Activity2" name="act2" class="boxx">
+    <input type="text" placeholder="Activity3" name="act3" class="boxx">
+    <input type="url" placeholder="Facebook" name="Fb" class="boxx" value="{{ session.user.facebook }}">
+    <input type="url" placeholder="Linkedin" name="li" class="boxx" value="{{ session.user.linkedin }}">
+    <input type="url" placeholder="Instagram" name="ig" class="boxx" value="{{ session.user.instagram }}">
+    <input type="url" placeholder="Github" name="git" class="boxx" value="{{ session.user.github }}">
+    <div class="co">
+      <div class="imga" data-img="">
+        <i class='bx bxs-cloud-upload iconn'></i>
+        <h4>Upload Image</h4>
+        <p>Image must be less than<span>2MB</span></p>
+      </div>
+      <input type="file" id="file" accept="image/*" hidden>
+    </div>
+    <input type="submit" value="Save changes" class="btn">
+    <input type="submit" value="Select Profile Image" class="btn5">
+  </form>
+  </div>
+</section>
+<script src="../static/Scripts/Script1.js"></script>
 </body>
 </html>
