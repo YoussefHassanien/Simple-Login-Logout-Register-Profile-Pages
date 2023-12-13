@@ -21,9 +21,9 @@ def home():
 @app.route("/profile", methods=["GET", "POST"])
 def profile():
     biography = "Please tell us more about you!"
-    activity1 = "I love Rebecca!"
-    activity2 = "I love Rebecca!"
-    activity3 = "I love Rebecca!"
+    activity1 = " "
+    activity2 = " "
+    activity3 = " "
     userprofileimage = "../static/Images/44-facts-about-rebecca-ferguson-1690782435.jpg"
     status = request.form.get("status")
     return render_template("Profile.html", biography=biography, activity1=activity1, activity2=activity2,
@@ -90,7 +90,6 @@ def edit_profile():
 def save_changes():
     biography = request.form['biography']
     userfname = request.form.get("Fname")
-    print(userfname)
     userlname = request.form.get("Lname")
     userphone = request.form.get("phone")
     useraddress = request.form.get("Adress")
@@ -106,10 +105,14 @@ def save_changes():
     activity3 = request.form.get("act3")
     status = request.form.get("status")
     CurrentEmail = session["user"]["email"]
+    userprofileimage = " "
+    current_email = cursor.execute("SELECT email FROM usersinformation WHERE email =CurrentEmail")
 
 
-    cursor.execute('UPDATE usersinformation SET Fname= %s , Lname= %s , Phone= %s, Address= %s , Job= %s , Facebook= %s,Github=%s, Instagram=%s, Linkedin=%s WHere email= %s',(userfname,userlname,userphone,useraddress,userjob,userfacebook,usergithub,userinstagram,userlinkedin,CurrentEmail))
-    return redirect('/profile')
+    cursor.execute('UPDATE usersinformation SET Fname= %s , Lname= %s , Phone= %s, Address= %s , Job= %s , Facebook= %s,Github=%s, Instagram=%s, Linkedin=%s WHere email= %s',(userfname,userlname,userphone,useraddress,userjob,userfacebook,usergithub,userinstagram,userlinkedin,current_email))
+    database_session.commit()
+    return render_template("Profile.html", biography=biography, activity1=activity1, activity2=activity2,
+                           activity3=activity3, userprofileimage=userprofileimage, status=status)
 
 
 
