@@ -5,11 +5,11 @@ app = Flask(__name__)
 app.secret_key = "queensqueries"
 
 database_session = psycopg2.connect(
-     database="profiledata",
+     database="postgres",
      port=5432,
      host="localhost",
      user="postgres",
-     password="Youssef.17.11"
+     password="8383"
 )
 
 cursor = database_session.cursor(cursor_factory=psycopg2.extras.DictCursor)
@@ -24,9 +24,9 @@ def profile():
     activity1 = request.form.get('act1')
     activity2 = request.form.get('act2')
     activity3 = request.form.get('act3')
-    status = request.form.get("status")
+
     return render_template("Profile.html", biography=biography, activity1=activity1, activity2=activity2,
-                           activity3=activity3, status=status)
+                           activity3=activity3)
 
 
 @app.route("/login", methods=["GET", "POST"])

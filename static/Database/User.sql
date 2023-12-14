@@ -1,6 +1,6 @@
 
 
-CREATE TABLE UserInfo(
+CREATE TABLE Usernew(
     userID serial ,
     Fname varchar(30) not null ,
     Lname varchar(30) not null ,
