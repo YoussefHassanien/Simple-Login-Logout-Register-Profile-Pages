@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, redirect, session
+from flask import Flask, render_template, request, redirect, session,send_from_directory
 import psycopg2.extras
 
 app = Flask(__name__)
@@ -20,14 +20,13 @@ def home():
 
 @app.route("/profile", methods=["GET", "POST"])
 def profile():
-    biography = "Please tell us more about you!"
-    activity1 = " "
-    activity2 = " "
-    activity3 = " "
-    userprofileimage = "../static/Images/44-facts-about-rebecca-ferguson-1690782435.jpg"
+    biography = request.form.get('biography')
+    activity1 = request.form.get('act1')
+    activity2 = request.form.get('act2')
+    activity3 = request.form.get('act3')
     status = request.form.get("status")
     return render_template("Profile.html", biography=biography, activity1=activity1, activity2=activity2,
-                           activity3=activity3, userprofileimage=userprofileimage, status=status)
+                           activity3=activity3, status=status)
 
 
 @app.route("/login", methods=["GET", "POST"])
@@ -36,7 +35,7 @@ def login():
     useremail = request.form.get("email")
     userpassword = request.form.get("password")
     if useremail:
-        cursor.execute('SELECT * FROM usersinformation where email = %s and password = %s', (useremail, userpassword))
+        cursor.execute('SELECT * FROM Usernew where email = %s and password = %s', (useremail, userpassword))
         result = cursor.fetchone()
         if result:
             session['user'] = dict(result)
@@ -60,16 +59,17 @@ def register():
     usergithub = request.form.get("github")
     userinstagram = request.form.get("instagram")
     userlinkedin = request.form.get("linkedin")
+    userprofileimage = "../static/Images/blank-profile-picture-973460_960_720.webp"
 
     if useremail:
-        cursor.execute('SELECT email FROM usersinformation where email = %s', (useremail,))
+        cursor.execute('SELECT email FROM Usernew where email = %s', (useremail,))
         if cursor.fetchone():
             message = 'Account already exits!'
         else:
-            cursor.execute('INSERT INTO usersinformation(Fname, Lname, phone, Address, Email, password, Job, '
-                           'Facebook, Github, Instagram, Linkedin) VALUES (%s, %s ,%s, %s, %s, %s, %s, %s, %s, %s, '
-                           '%s)', (userfname, userlname, userphone, useraddress, useremail, userpassword, userjob,
-                                   userfacebook, usergithub, userinstagram, userlinkedin))
+            cursor.execute('INSERT INTO Usernew(Fname, Lname, phone, Address, Email, password, Job, '
+                           'Facebook, Github, Instagram, Linkedin, image) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)',
+                           (userfname, userlname, userphone, useraddress, useremail, userpassword, userjob,
+                            userfacebook, usergithub, userinstagram, userlinkedin, userprofileimage))
             database_session.commit()
             message = 'You have successfully registered!'
 
@@ -105,14 +105,17 @@ def save_changes():
     activity3 = request.form.get("act3")
     status = request.form.get("status")
     CurrentEmail = session["user"]["email"]
-    userprofileimage = " "
-    cursor.execute("SELECT email FROM usersinformation WHERE email = %s", (CurrentEmail,))
+    userprofileimage = request.form.get("image")
+    cursor.execute("SELECT email FROM Usernew WHERE email = %s", (CurrentEmail,))
     current_email = cursor.fetchone()[0]
 
-    cursor.execute('UPDATE usersinformation SET Fname= %s , Lname= %s , Phone= %s, Address= %s , Job= %s , Facebook= %s,Github= %s, Instagram= %s, Linkedin= %s WHERE email= %s',(userfname,userlname,userphone,useraddress,userjob,userfacebook,usergithub,userinstagram,userlinkedin,current_email))
+    cursor.execute('UPDATE Usernew SET Fname= %s , Lname= %s , Phone= %s, Address= %s , Job= %s , Facebook= %s,Github= %s, Instagram= %s, Linkedin= %s, image= %s WHERE email= %s',(userfname,userlname,userphone,useraddress,userjob,userfacebook,usergithub,userinstagram,userlinkedin,userprofileimage,current_email))
     database_session.commit()
+    cursor.execute("SELECT * FROM Usernew WHERE email = %s", (CurrentEmail,))
+    newData = cursor.fetchone()
+    session['user'] = dict(newData)
     return render_template("Profile.html", biography=biography, activity1=activity1, activity2=activity2,
-                           activity3=activity3, userprofileimage=userprofileimage, status=status)
+                           activity3=activity3, status=status)
 
 
 

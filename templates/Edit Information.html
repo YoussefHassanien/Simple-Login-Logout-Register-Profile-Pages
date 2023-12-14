@@ -19,8 +19,8 @@
 {#    <input type="email" placeholder="Email" name="email" class="boxx" value="{{ session.user.email }}">#}
 {#    <input type="password" placeholder="Password" name="password" class="boxx" value="{{ session.user.password }}">#}
     <input type="tel" placeholder="Phone" name="phone" class="boxx" value="{{ session.user.phone }}">
-    <input type="text" placeholder="Please tell us more about you" name="biography" class="boxx">
-    <input type="text" placeholder="" name="biography" class="boxx">
+    #<input type="text" placeholder="Please tell us more about you" name="biography" class="boxx">
+    <input type="text" placeholder="Biography" name="biography" class="boxx">
     <input type="text" placeholder="Activity1" name="act1" class="boxx">
     <input type="text" placeholder="Activity2" name="act2" class="boxx">
     <input type="text" placeholder="Activity3" name="act3" class="boxx">
@@ -28,19 +28,10 @@
     <input type="url" placeholder="Linkedin" name="li" class="boxx" value="{{ session.user.linkedin }}">
     <input type="url" placeholder="Instagram" name="ig" class="boxx" value="{{ session.user.instagram }}">
     <input type="url" placeholder="Github" name="git" class="boxx" value="{{ session.user.github }}">
-    <div class="co">
-      <div class="imga" data-img="">
-        <i class='bx bxs-cloud-upload iconn'></i>
-        <h4>Upload Image</h4>
-        <p>Image must be less than<span>2MB</span></p>
-      </div>
-      <input type="file" id="file" accept="image/*" hidden>
-    </div>
+    <input type="text" placeholder="Edit image URL" name="image" class="boxx" value="{{ session.user.image }}">
     <input type="submit" value="Save changes" class="btn">
-    <input type="submit" value="Select Profile Image" class="btn5">
   </form>
   </div>
 </section>
-<script src="../static/Scripts/Script1.js"></script>
 </body>
 </html>
