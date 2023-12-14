@@ -5,11 +5,11 @@ app = Flask(__name__)
 app.secret_key = "queensqueries"
 
 database_session = psycopg2.connect(
-     database="postgres",
+     database="profiledata",
      port=5432,
      host="localhost",
      user="postgres",
-     password="8383"
+     password="Youssef.17.11"
 )
 
 cursor = database_session.cursor(cursor_factory=psycopg2.extras.DictCursor)
