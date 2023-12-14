@@ -93,8 +93,6 @@ def save_changes():
     userlname = request.form.get("Lname")
     userphone = request.form.get("phone")
     useraddress = request.form.get("Adress")
-    useremail = request.form.get("email")
-    userpassword = request.form.get("password")
     userjob = request.form.get("job")
     userfacebook = request.form.get("Fb")
     usergithub = request.form.get("git")
